@@ -1,7 +1,5 @@
 import { Request, Response } from 'express';
 import bcrypt from 'bcrypt';
-import jwt from 'jsonwebtoken';
-import { User } from '../models/user.model';
 import { createUser, userExistsByEmailOrUsername } from '../services/user.service';
 import dotenv from 'dotenv';
 
