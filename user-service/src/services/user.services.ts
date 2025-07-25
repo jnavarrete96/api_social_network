@@ -46,3 +46,28 @@ export const getUserById = async (id: string) => {
 
   return user
 }
+
+export const getUserByIdentifier = async (identifier: string) => {
+  try {
+    const user = await User.findOne({
+      where: {
+        [Op.or]: [
+          { email: identifier },
+          { user_name: identifier }
+        ]
+      }
+    })
+
+    if (!user) {
+      const error = new Error('Usuario no encontrado')
+      // @ts-ignore
+      error.status = 404
+      throw error
+    }
+
+    return user
+  } catch (err) {
+    console.error('Error al buscar usuario por identificador:', err)
+    throw err
+  }
+}
