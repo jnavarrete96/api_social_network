@@ -1,12 +1,11 @@
 import axios from 'axios'
 import bcrypt from 'bcrypt'
 import { generateToken } from '../utils/utils'
-
-const USER_SERVICE_URL = process.env.USER_SERVICE_URL
+import { USER_SERVICE_URL } from '../config'
 
 export const loginUser = async (identifier: string, password: string) => {
   try {
-    const response = await axios.get(`${USER_SERVICE_URL}/api/users/auth-info`, {
+    const response = await axios.get(`${USER_SERVICE_URL}/users/info-auth`, {
       params: { identifier }
     })
 

@@ -32,7 +32,7 @@ export const userExistsByEmailOrUsername = async (email: string, user_name: stri
   return false
 }
 
-export const getUserById = async (id: string) => {
+export const getUserById = async (id: string): Promise<Record<string, any>> => {
   try {
     const user = await User.findByPk(id)
 
@@ -43,7 +43,10 @@ export const getUserById = async (id: string) => {
       throw error
     }
 
-    return user
+    // Convertimos a objeto plano y extraemos la contraseña
+    const { password_hash, ...safeUser } = (user.toJSON() as Record<string, any>)
+
+    return safeUser
   } catch (err) {
     console.error('Error al obtener usuario por ID:', err)
     throw err
