@@ -1,8 +1,8 @@
 import express, { Application } from 'express';
 import cors from 'cors';
 import morgan from 'morgan';
-import authRoutes from './src/routes/auth.routes'
-import { errorHandler } from './src/middlewares/errorHandler'
+import authRoutes from './routes/auth.routes'
+import { errorHandler } from './middlewares/errorHandler'
 
 const app: Application = express();
 
