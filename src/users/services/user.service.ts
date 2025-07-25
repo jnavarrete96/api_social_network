@@ -15,13 +15,19 @@ export const createUser = async (data: CreateUserInput) => {
 };
 
 // Verifica si ya existe un usuario por email o nombre de usuario
-export const userExistsByEmailOrUsername = async (
-  email: string,
-  user_name: string
-) => {
-  return await User.findOne({
+export const userExistsByEmailOrUsername = async (email: string, user_name: string) => {
+  const user = await User.findOne({
     where: {
       [Op.or]: [{ email }, { user_name }]
     }
-  });
-};
+  })
+
+  if (user) {
+    const error = new Error('Ya existe un usuario con ese email o nombre de usuario.')
+    // @ts-ignore
+    error.status = 409
+    throw error
+  }
+
+  return false
+}
