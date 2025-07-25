@@ -11,13 +11,19 @@ export const loginUser = async (identifier: string, password: string) => {
   })
 
   if (!user) {
-    throw new Error('Credenciales inválidas.')
+    const error = new Error('Usuario o correo no encontrado')
+    // @ts-ignore
+    error.status = 404
+    throw error
   }
 
   const isMatch = await bcrypt.compare(password, user.password_hash)
 
   if (!isMatch) {
-    throw new Error('Credenciales inválidas.')
+    const error = new Error('Contraseña incorrecta')
+    // @ts-ignore
+    error.status = 401
+    throw error
   }
 
   return generateToken(user.id)
