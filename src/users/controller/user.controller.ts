@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction  } from 'express';
 import bcrypt from 'bcrypt';
-import { createUser, userExistsByEmailOrUsername } from '../services/user.service';
+import { createUser, userExistsByEmailOrUsername, getUserById } from '../services/user.service';
 import dotenv from 'dotenv';
 
 dotenv.config();
@@ -38,3 +38,16 @@ export const register = async (req: Request, res: Response, next: NextFunction) 
     next(err)
   }
 };
+
+export const getProfile = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    // @ts-ignore
+    const userId = req.userId
+
+    const user = await getUserById(userId)
+
+    return res.status(200).json(user)
+  } catch (err) {
+    next(err)
+  }
+}

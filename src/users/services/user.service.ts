@@ -31,3 +31,18 @@ export const userExistsByEmailOrUsername = async (email: string, user_name: stri
 
   return false
 }
+
+export const getUserById = async (id: string) => {
+  const user = await User.findByPk(id, {
+    attributes: ['id', 'full_name', 'birth_date', 'user_name', 'email', 'created_at', 'updated_at']
+  })
+
+  if (!user) {
+    const error = new Error('Usuario no encontrado')
+    // @ts-ignore
+    error.status = 404
+    throw error
+  }
+
+  return user
+}
