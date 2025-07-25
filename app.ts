@@ -2,6 +2,7 @@ import express, { Application } from 'express';
 import cors from 'cors';
 import morgan from 'morgan';
 import userRoutes from './src/users/routes/user.routes'
+import authRoutes from './src/auth/routes/auth.routes'
 
 const app: Application = express();
 
@@ -18,5 +19,6 @@ app.get('/', (_req, res) => {
 
 //Rutas
 app.use('/users', userRoutes)
+app.use('/auth', authRoutes)
 
 export default app;
