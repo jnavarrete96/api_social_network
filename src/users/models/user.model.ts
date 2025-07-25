@@ -1,7 +1,29 @@
-import { DataTypes, Model } from 'sequelize';
+import { DataTypes, Model, Optional } from 'sequelize';
 import sequelize  from '../../../config/database';
 
-export class User extends Model {}
+export interface UserAttributes {
+  id: string;
+  full_name: string;
+  birth_date: Date;
+  user_name: string;
+  email: string;
+  password_hash: string;
+  created_at?: Date;
+  updated_at?: Date;
+}
+
+export interface UserCreationAttributes extends Optional<UserAttributes, 'id' | 'created_at' | 'updated_at'> {}
+
+export class User extends Model<UserAttributes, UserCreationAttributes> implements UserAttributes {
+  public id!: string;
+  public full_name!: string;
+  public birth_date!: Date;
+  public user_name!: string;
+  public email!: string;
+  public password_hash!: string;
+  public readonly created_at!: Date;
+  public readonly updated_at!: Date;
+}
 
 User.init(
   {
