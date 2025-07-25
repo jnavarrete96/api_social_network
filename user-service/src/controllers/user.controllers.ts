@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction  } from 'express';
 import bcrypt from 'bcrypt';
-import { createUser, userExistsByEmailOrUsername, getUserByIdentifier, getUserById  } from '../services/user.services';
+import { createUser, userExistsByEmailOrUsername, getUserByIdentifier, getUserById, getPublicUserById  } from '../services/user.services';
 import dotenv from 'dotenv';
 
 dotenv.config();
@@ -70,5 +70,15 @@ export const getUserForAuth = async (req: Request, res: Response, next: NextFunc
     })
   } catch (error) {
     next(error)
+  }
+}
+
+export const getUserPublic = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const { id } = req.params
+    const user = await getPublicUserById(id)
+    res.json(user)
+  } catch (err) {
+    next(err)
   }
 }

@@ -77,3 +77,13 @@ export const getUserByIdentifier = async (identifier: string) => {
     throw err
   }
 }
+
+export const getPublicUserById = async (id: string) => {
+  const user = await getUserById(id) // devuelve sin password_hash
+  // Solo devolvemos lo que interesa al Post‑Service
+  return {
+    id:        user.id,
+    full_name: user.full_name,
+    user_name: user.user_name
+  }
+}
