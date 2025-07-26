@@ -1,0 +1,21 @@
+# Node
+node_modules/
+dist/
+
+# TypeScript
+*.tsbuildinfo
+
+# Env
+.env
+
+# Logs
+logs/
+*.log
+
+# Editor config
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
