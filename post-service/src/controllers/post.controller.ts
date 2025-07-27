@@ -49,7 +49,7 @@ export const listPosts = async (
         const user = await fetchUserInfo(p.user_id)
         return {
           id:         p.id,
-          author:     { full_name: user.full_name, user_name: user.user_name },
+          author:     { id:user.id, full_name: user.full_name, user_name: user.user_name },
           content:    p.content,
           created_at: p.created_at
         }
@@ -81,7 +81,7 @@ export const listPostsByUser = async (
     const user = await fetchUserInfo(userId)
     const feed = posts.map(p => ({
       id:         p.id,
-      author:     { full_name: user.full_name, user_name: user.user_name },
+      author:     { id:user.id,full_name: user.full_name, user_name: user.user_name },
       content:    p.content,
       created_at: p.created_at
     }))

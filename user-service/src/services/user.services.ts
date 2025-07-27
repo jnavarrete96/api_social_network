@@ -84,6 +84,8 @@ export const getPublicUserById = async (id: string) => {
   return {
     id:        user.id,
     full_name: user.full_name,
-    user_name: user.user_name
+    user_name: user.user_name,
+    birth_date: user.birth_date,
+    email: user.email
   }
 }
