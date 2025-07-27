@@ -1,11 +1,11 @@
-import express, { Application } from 'express'
 import dotenv from 'dotenv'
+dotenv.config()
+
+import express, { Application } from 'express'
 import cors from 'cors';
 import morgan from 'morgan';
 import { errorHandler } from './middlewares/errorHandler'
 import likeRouter from './routes/like.routes'
-
-dotenv.config()
 
 const app: Application = express();
 
